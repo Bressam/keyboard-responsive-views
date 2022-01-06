@@ -16,6 +16,7 @@
 		18EA65B727701697000C2030 /* InheritingBaseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18EA65B527701697000C2030 /* InheritingBaseViewController.xib */; };
 		18EA65BA27701952000C2030 /* NormalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA65B827701952000C2030 /* NormalViewController.swift */; };
 		18EA65BB27701952000C2030 /* NormalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18EA65B927701952000C2030 /* NormalViewController.xib */; };
+		18F7E330278649A300330747 /* UIViewController+KeyboardMove.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F7E32F278649A300330747 /* UIViewController+KeyboardMove.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		18EA65B527701697000C2030 /* InheritingBaseViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InheritingBaseViewController.xib; sourceTree = "<group>"; };
 		18EA65B827701952000C2030 /* NormalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalViewController.swift; sourceTree = "<group>"; };
 		18EA65B927701952000C2030 /* NormalViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NormalViewController.xib; sourceTree = "<group>"; };
+		18F7E32F278649A300330747 /* UIViewController+KeyboardMove.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+KeyboardMove.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				18EA65B527701697000C2030 /* InheritingBaseViewController.xib */,
 				18EA65B827701952000C2030 /* NormalViewController.swift */,
 				18EA65B927701952000C2030 /* NormalViewController.xib */,
+				18F7E32F278649A300330747 /* UIViewController+KeyboardMove.swift */,
 			);
 			path = keyboardMoveUpViewsTemplate;
 			sourceTree = "<group>";
@@ -156,6 +159,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18F7E330278649A300330747 /* UIViewController+KeyboardMove.swift in Sources */,
 				1854378C27700A37004DAA1F /* AppDelegate.swift in Sources */,
 				1854378E27700A37004DAA1F /* SceneDelegate.swift in Sources */,
 				18EA65AF277014EB000C2030 /* BaseViewController.swift in Sources */,
