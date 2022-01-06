@@ -10,12 +10,12 @@
 		1854378C27700A37004DAA1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1854378B27700A37004DAA1F /* AppDelegate.swift */; };
 		1854378E27700A37004DAA1F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1854378D27700A37004DAA1F /* SceneDelegate.swift */; };
 		1854379527700A41004DAA1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1854379427700A41004DAA1F /* Assets.xcassets */; };
+		18A4D5B127866CF100A12AE3 /* InheritingBaseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A4D5AD27866CF100A12AE3 /* InheritingBaseViewController.xib */; };
+		18A4D5B227866CF100A12AE3 /* InheritingBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A4D5AE27866CF100A12AE3 /* InheritingBaseViewController.swift */; };
+		18A4D5B327866CF100A12AE3 /* NormalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A4D5AF27866CF100A12AE3 /* NormalViewController.swift */; };
+		18A4D5B427866CF100A12AE3 /* NormalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A4D5B027866CF100A12AE3 /* NormalViewController.xib */; };
 		18EA65AC2770149C000C2030 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18EA65AB2770149C000C2030 /* LaunchScreen.xib */; };
-		18EA65AF277014EB000C2030 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA65AE277014EB000C2030 /* BaseViewController.swift */; };
-		18EA65B627701697000C2030 /* InheritingBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA65B427701697000C2030 /* InheritingBaseViewController.swift */; };
-		18EA65B727701697000C2030 /* InheritingBaseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18EA65B527701697000C2030 /* InheritingBaseViewController.xib */; };
-		18EA65BA27701952000C2030 /* NormalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EA65B827701952000C2030 /* NormalViewController.swift */; };
-		18EA65BB27701952000C2030 /* NormalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18EA65B927701952000C2030 /* NormalViewController.xib */; };
+		18F7E330278649A300330747 /* UIViewController+KeyboardMove.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F7E32F278649A300330747 /* UIViewController+KeyboardMove.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,12 +24,12 @@
 		1854378D27700A37004DAA1F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		1854379427700A41004DAA1F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1854379927700A41004DAA1F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18A4D5AD27866CF100A12AE3 /* InheritingBaseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InheritingBaseViewController.xib; sourceTree = "<group>"; };
+		18A4D5AE27866CF100A12AE3 /* InheritingBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InheritingBaseViewController.swift; sourceTree = "<group>"; };
+		18A4D5AF27866CF100A12AE3 /* NormalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NormalViewController.swift; sourceTree = "<group>"; };
+		18A4D5B027866CF100A12AE3 /* NormalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NormalViewController.xib; sourceTree = "<group>"; };
 		18EA65AB2770149C000C2030 /* LaunchScreen.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
-		18EA65AE277014EB000C2030 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		18EA65B427701697000C2030 /* InheritingBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InheritingBaseViewController.swift; sourceTree = "<group>"; };
-		18EA65B527701697000C2030 /* InheritingBaseViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InheritingBaseViewController.xib; sourceTree = "<group>"; };
-		18EA65B827701952000C2030 /* NormalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalViewController.swift; sourceTree = "<group>"; };
-		18EA65B927701952000C2030 /* NormalViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NormalViewController.xib; sourceTree = "<group>"; };
+		18F7E32F278649A300330747 /* UIViewController+KeyboardMove.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+KeyboardMove.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,11 +64,8 @@
 			children = (
 				18EA65AD277014CF000C2030 /* Resources */,
 				1854379927700A41004DAA1F /* Info.plist */,
-				18EA65AE277014EB000C2030 /* BaseViewController.swift */,
-				18EA65B427701697000C2030 /* InheritingBaseViewController.swift */,
-				18EA65B527701697000C2030 /* InheritingBaseViewController.xib */,
-				18EA65B827701952000C2030 /* NormalViewController.swift */,
-				18EA65B927701952000C2030 /* NormalViewController.xib */,
+				18F7E33127866BE100330747 /* Views */,
+				18F7E32F278649A300330747 /* UIViewController+KeyboardMove.swift */,
 			);
 			path = keyboardMoveUpViewsTemplate;
 			sourceTree = "<group>";
@@ -82,6 +79,17 @@
 				18EA65AB2770149C000C2030 /* LaunchScreen.xib */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		18F7E33127866BE100330747 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				18A4D5AE27866CF100A12AE3 /* InheritingBaseViewController.swift */,
+				18A4D5AD27866CF100A12AE3 /* InheritingBaseViewController.xib */,
+				18A4D5AF27866CF100A12AE3 /* NormalViewController.swift */,
+				18A4D5B027866CF100A12AE3 /* NormalViewController.xib */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -142,10 +150,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18EA65B727701697000C2030 /* InheritingBaseViewController.xib in Resources */,
-				18EA65BB27701952000C2030 /* NormalViewController.xib in Resources */,
 				18EA65AC2770149C000C2030 /* LaunchScreen.xib in Resources */,
+				18A4D5B427866CF100A12AE3 /* NormalViewController.xib in Resources */,
 				1854379527700A41004DAA1F /* Assets.xcassets in Resources */,
+				18A4D5B127866CF100A12AE3 /* InheritingBaseViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,11 +164,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18A4D5B227866CF100A12AE3 /* InheritingBaseViewController.swift in Sources */,
+				18F7E330278649A300330747 /* UIViewController+KeyboardMove.swift in Sources */,
 				1854378C27700A37004DAA1F /* AppDelegate.swift in Sources */,
+				18A4D5B327866CF100A12AE3 /* NormalViewController.swift in Sources */,
 				1854378E27700A37004DAA1F /* SceneDelegate.swift in Sources */,
-				18EA65AF277014EB000C2030 /* BaseViewController.swift in Sources */,
-				18EA65BA27701952000C2030 /* NormalViewController.swift in Sources */,
-				18EA65B627701697000C2030 /* InheritingBaseViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

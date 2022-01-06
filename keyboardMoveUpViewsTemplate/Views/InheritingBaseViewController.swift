@@ -7,7 +7,7 @@
 
 import UIKit
 
-class InheritingBaseViewController: BaseViewController {
+class InheritingBaseViewController: UIViewControllerWithKeyboardMove {
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -7,6 +7,7 @@
 
 import UIKit
 
+// iOS system resources: https://developer.apple.com/design/resources/
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
@@ -18,12 +19,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         // Tab bar
         let tabBarController = UITabBarController()
-        
+        tabBarController.tabBar.tintColor = #colorLiteral(red: 0.8549019694, green: 0.250980407, blue: 0.4784313738, alpha: 1)
+        tabBarController.tabBar.backgroundColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+//        tabBarController.tabBar.isTranslucent = false
+	        
         // Controllers
         let normalVC = NormalViewController()
-        normalVC.tabBarItem = UITabBarItem(tabBarSystemItem: .downloads, tag: 0)
+        normalVC.tabBarItem = UITabBarItem(title: "Normal", image: UIImage(systemName: "clear.fill"), tag: 0)
         let inheritingBaseVC = InheritingBaseViewController()
-        inheritingBaseVC.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
+        inheritingBaseVC.tabBarItem = UITabBarItem(title: "Keyboard Extension", image: UIImage(systemName: "shift.fill"), tag: 1)
         
         // Append
         tabBarController.viewControllers = [normalVC, inheritingBaseVC]

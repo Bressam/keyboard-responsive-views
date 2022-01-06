@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="landscape" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InheritingBaseViewController" customModule="keyboardMoveUpViewsTemplate" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Inheriting UIViewControllerWithKeyboardMove" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MEG-NO-Yby">
+                    <rect key="frame" x="271.5" y="70" width="353" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nc0-SY-UGs">
+                    <rect key="frame" x="64" y="215" width="768" height="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rpt-Zb-dXr">
+                    <rect key="frame" x="64" y="151" width="768" height="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" red="0.71915375318760744" green="0.89000000000000001" blue="0.75346050880865201" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="MEG-NO-Yby" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="100" id="01W-Tx-VJu">
+                    <variation key="heightClass=compact" constant="70"/>
+                </constraint>
+                <constraint firstItem="rpt-Zb-dXr" firstAttribute="top" secondItem="MEG-NO-Yby" secondAttribute="bottom" constant="100" id="BYk-Oz-CYb">
+                    <variation key="heightClass=compact" constant="60"/>
+                </constraint>
+                <constraint firstItem="rpt-Zb-dXr" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="FMg-Ww-sxr"/>
+                <constraint firstItem="nc0-SY-UGs" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="QAW-46-oE8"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="nc0-SY-UGs" secondAttribute="trailing" constant="20" id="RVm-Pb-j5k"/>
+                <constraint firstItem="MEG-NO-Yby" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="WmQ-PL-vcf"/>
+                <constraint firstItem="rpt-Zb-dXr" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="bls-0u-fVH"/>
+                <constraint firstItem="nc0-SY-UGs" firstAttribute="top" secondItem="rpt-Zb-dXr" secondAttribute="bottom" constant="240" id="dlV-w7-E0n">
+                    <variation key="heightClass=compact" constant="30"/>
+                </constraint>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="rpt-Zb-dXr" secondAttribute="trailing" constant="20" id="fPH-xK-Q7B"/>
+                <constraint firstItem="nc0-SY-UGs" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="ucK-mu-20E"/>
+            </constraints>
+            <point key="canvasLocation" x="137.68115942028987" y="92.410714285714278"/>
+        </view>
+    </objects>
+</document>
