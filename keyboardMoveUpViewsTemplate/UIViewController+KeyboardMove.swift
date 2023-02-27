@@ -14,41 +14,71 @@
 
 import UIKit
 
+/// Delegate used to inform other views when the keyboard appears/disappears, informing the keyboard height
+protocol KeyboardMoveViewControllerDelegate: AnyObject {
+    func keyboardDidAppear(_ keyboardHeight: CGFloat)
+    func keyboardDidDisappear(_ keyboardHeight: CGFloat)
+}
+
+/// Datasource to provide values for spacing and animations
+protocol KeyboardMoveViewControllerDataSource: AnyObject {
+    func viewAnimationDuration() -> TimeInterval
+    func spaceBetweenTxtFieldAndKeyboard() -> CGFloat
+}
+
+/// Default dataSource for any view controller
+extension KeyboardMoveViewControllerDataSource where Self: UIViewController {
+    func viewAnimationDuration() -> TimeInterval {
+        return 0.4
+    }
+
+    func spaceBetweenTxtFieldAndKeyboard() -> CGFloat {
+        return 8
+    }
+}
+
 open class UIViewControllerWithKeyboardMove: UIViewController {
 // MARK: Animation and Layout constants
     /// Constant used to adjust the distance from keyboard to the textField/TextView
-    private let spaceBetweenTxtFieldAndKeyboard : CGFloat = 8
-
+    private var spaceBetweenTxtFieldAndKeyboard: CGFloat {
+        return keyboardMoveDatasource?.spaceBetweenTxtFieldAndKeyboard() ?? 8
+    }
+    
     /// Duration of view's animation to move up after keyboard shows
-    private let viewAnimationDuration : TimeInterval = 0.4
+    private var viewAnimationDuration: TimeInterval {
+        return keyboardMoveDatasource?.viewAnimationDuration() ?? 0.4
+    }
 
 // MARK: Variables
     /// Used to enable/disable screen moving when keyboard shows
     var enableMoveKeyboard: Bool = true {
         didSet {
-            enableMoveKeyboard ? self.addKeyboardObserver() : self.removeKeyboardObserver()
+            enableMoveKeyboard ? self.addKeyboardMoveObserver() : self.removeKeyboardMoveObserver()
         }
     }
 
+    /// Used to recieve notifications when the keyboard appear/disappear
+    weak var keyboardMoveDelegate: KeyboardMoveViewControllerDelegate?
+    weak var keyboardMoveDatasource: KeyboardMoveViewControllerDataSource?
+
     /// Used to store view's original Y position, that may change if view is contained into navigation controller and also in other cases
-    private var originalYPosition: CGFloat = 0
+    private lazy var originalYPosition: CGFloat = {
+        // Be sure it is related to parentVC if has one, just getting the view.frame wasn't reliable since in random/intermittent scenarios the view.frame was returning y not related to parent
+        let viewFrameOnScreen = self.getParentViewCoordinates(of: self.view.frame)
+        return viewFrameOnScreen.origin.y
+    }()
 
 // MARK: View Lifecycle
     open override func viewWillAppear(_ animated: Bool) {
-        self.setupTapToDismissKeyboard()
-        self.addKeyboardObserver()
-    }
-
-    open override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        // Be sure it is related to parentVC if has one, just getting the view.frame wasn't reliable since in random/intermittent scenarios the view.frame was returning y not related to parent
-        let viewFrameOnScreen = self.getParentViewCoordinates(of: self.view.frame)
-        originalYPosition = viewFrameOnScreen.origin.y
+        setupTapToDismissKeyboard()
+        addKeyboardMoveObserver()
+        addKeyboardNotificationObserver()
     }
 
     open override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        removeKeyboardObserver()
+        removeKeyboardMoveObserver()
+        removeKeyboardNotificationObserver()
     }
 
 // MARK: Dismiss keyboard gesture
@@ -93,10 +123,26 @@ open class UIViewControllerWithKeyboardMove: UIViewController {
 
 // MARK: Keyboard & View's Layout functions
     /// Add needed observer to be notified of keyboard frame changing
-    private func addKeyboardObserver() {
+    ///
+    /// This observer is used in the calculations to check and move the entire view UI if needed
+    private func addKeyboardMoveObserver() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(keyboardNotifications(notification:)),
                                                name: UIResponder.keyboardWillChangeFrameNotification,
+                                               object: nil)
+    }
+
+    /// Add needed observers to be notified by the keyboard toggling
+    ///
+    /// Those observers are used to notify all views listening to the delegate
+    private func addKeyboardNotificationObserver() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardDidShow(notification:)),
+                                               name: UIResponder.keyboardDidShowNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardDidDisappear(notification:)),
+                                               name: UIResponder.keyboardDidHideNotification,
                                                object: nil)
     }
 
@@ -109,15 +155,39 @@ open class UIViewControllerWithKeyboardMove: UIViewController {
      _"If the observer is able to be stored as a zeroing-weak reference the underlying storage will store the observer as a zeroing weak reference.
      The next notification that would be routed to that observer will detect the zeroed reference and automatically un-register the observer"_
      */
-    private func removeKeyboardObserver() {
+    private func removeKeyboardMoveObserver() {
         NotificationCenter.default.removeObserver(self,
                                                   name: UIResponder.keyboardWillChangeFrameNotification,
                                                   object: nil)
     }
 
-    /// Used to notify when keyboard appears/dissapears or change its frame
+    /// Remove the added observers used to notify the keyboard toggling
+    private func removeKeyboardNotificationObserver() {
+        NotificationCenter.default.removeObserver(self,
+                                                  name: UIResponder.keyboardDidShowNotification,
+                                                  object: nil)
+        NotificationCenter.default.removeObserver(self,
+                                                  name: UIResponder.keyboardDidHideNotification,
+                                                  object: nil)
+    }
+
+    /// Used to notify when keyboard appears/disappears or change its frame
     @objc private func keyboardNotifications(notification: NSNotification) {
         self.moveViewIfKeyboardCoversField(notification)
+    }
+
+    /// Used to notify when keyboard appears using delegate
+    @objc private func keyboardDidShow(notification: NSNotification) {
+        if let keyboardFrame = notification.getKeyboardFrame() {
+            keyboardMoveDelegate?.keyboardDidAppear(keyboardFrame.height)
+        }
+    }
+
+    /// Used to notify when keyboard disappears using delegate
+    @objc private func keyboardDidDisappear(notification: NSNotification) {
+        if let keyboardFrame = notification.getKeyboardFrame() {
+            keyboardMoveDelegate?.keyboardDidDisappear(keyboardFrame.height)
+        }
     }
 
     /// Get the TextField or TextView that user is editing and returns it Y position on screen coordinates return
@@ -146,21 +216,20 @@ open class UIViewControllerWithKeyboardMove: UIViewController {
         guard let selectedTextFieldY = getYPositionOfFieldInUse() else { return }
 
         // Get keyboard frame, its frame is on screen coordinates so no need to convert
-        if let userInfo = notification.userInfo,
-           let keyBoardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+        if let keyboardFrame = notification.getKeyboardFrame() {
             var viewNewOriginY: CGFloat = 0.0
 
             // If keyboard is moving away from the view or won't cover/keep space from the field
-            if (keyBoardFrame.origin.y >= UIScreen.main.bounds.size.height)
-                || (selectedTextFieldY < (keyBoardFrame.origin.y - spaceBetweenTxtFieldAndKeyboard)) {
+            if (keyboardFrame.origin.y >= UIScreen.main.bounds.size.height)
+                || (selectedTextFieldY < (keyboardFrame.origin.y - spaceBetweenTxtFieldAndKeyboard)) {
                 viewNewOriginY = self.originalYPosition
             } else {
                 // Calculate how much need to move and keep set space
-                var amountToMove = (selectedTextFieldY - keyBoardFrame.origin.y) + spaceBetweenTxtFieldAndKeyboard
+                var amountToMove = (selectedTextFieldY - keyboardFrame.origin.y) + spaceBetweenTxtFieldAndKeyboard
 
                 // For safety, check if won't move more than keyboard height, to avoid
                 // blank/dark space between keyboard and view
-                if amountToMove > keyBoardFrame.size.height { amountToMove = keyBoardFrame.size.height }
+                if amountToMove > keyboardFrame.size.height { amountToMove = keyboardFrame.size.height }
 
                 // Calculate new Y position
                 viewNewOriginY = self.originalYPosition - amountToMove
@@ -172,9 +241,12 @@ open class UIViewControllerWithKeyboardMove: UIViewController {
 
             // Animate and move the view Y to the calculated new value
             if viewNeedToMoveWithKeyboard {
-                UIView.animate(withDuration: viewAnimationDuration) {
+                UIView.animate(withDuration: viewAnimationDuration, animations: {
                     self.view.frame.origin.y = viewNewOriginY
-                }
+                }, completion: { _ in
+                    // Set the frame again to avoid cases when the view returns to its original position while animating. Reproducible in SetupSuccessfullyViewController.
+                    self.view.frame.origin.y = viewNewOriginY
+                })
             }
         }
     }
@@ -197,5 +269,18 @@ extension UIResponder {
     /// "Traps"/Hold the reference to  first responder
     @objc private func trap() {
         UIResponder.firstResponder = self
+    }
+}
+
+// MARK: NSNotification Extensions
+private extension NSNotification {
+
+    /// Returns the keyboard frame or nil
+    func getKeyboardFrame() -> CGRect? {
+        if let userInfo = self.userInfo,
+           let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            return keyboardFrame
+        }
+        return nil
     }
 }
